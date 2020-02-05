@@ -1,3 +1,18 @@
-<p>
-  home works!
-</p>
+<section>
+  <div class="w-50 mx-auto pt-5">
+    <ul class="list-inline pb-5" *ngFor="let post of postList.posts">
+      <div class="card">
+        <div class="card-header">
+          {{post.title}}
+        </div>
+        <div class="card-body">
+          <p class="card-text">{{post.content}}</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+        <ul class="list-group list-group-flush" *ngFor="let comment of post.comments">
+          <li class="list-group-item">{{comment.content}}</li>
+        </ul>
+      </div>
+    </ul>
+  </div>
+</section>
