@@ -9,6 +9,9 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { BoardUserComponent } from './components/board-user/board-user.component';
+import { BoardAdminComponent } from './components/board-admin/board-admin.component';
+
+import { authInterceptorProviders } from '../helpers/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,8 @@ import { BoardUserComponent } from './components/board-user/board-user.component
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    BoardUserComponent
+    BoardUserComponent,
+    BoardAdminComponent
   ],
   imports: [
     FormsModule,
@@ -24,7 +28,7 @@ import { BoardUserComponent } from './components/board-user/board-user.component
     HttpClientModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

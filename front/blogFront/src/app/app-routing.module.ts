@@ -4,12 +4,14 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { BoardUserComponent } from './components/board-user/board-user.component';
+import { BoardAdminComponent } from './components/board-admin/board-admin.component';
 
 const routes: Routes = [
-  {path: 'home', component: HomeComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'user', component: BoardUserComponent },
-  {path: 'register', component: RegisterComponent}
+  { path: 'home', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'user', component: BoardUserComponent },
+  { path: 'admin', component: BoardAdminComponent },
+  { path: 'register', component: RegisterComponent },
 ];
 
 @NgModule({
