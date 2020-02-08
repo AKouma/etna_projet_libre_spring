@@ -20,12 +20,17 @@ export class PostService {
     return this.http.get('http://localhost:3000/getPosts');
   }
 
-  createPost(post): Observable<Object> {
-    const dataAsJson = JSON.stringify({ title: post.title, description: post.description });
-    //const dataAsJSON = JSON.parse(data);
+  createPost(post): Observable<any> {
+    const data = JSON.stringify({ title: post.title, content: post.content });
+    console.log("data: stringify", data);
+    const dataAsJSON = JSON.parse(data);
 
     console.log("post to send: ", post);
-    console.log("post to send as JSON: ", dataAsJson);
-    return this.http.post<Event>('http://localhost:3000/insert-post', dataAsJson, httpOptions);
+    console.log("post to send as JSON: ", dataAsJSON);
+    return this.http.post<any>('http://localhost:3000/insert-post', dataAsJSON, httpOptions);
+  }
+
+  deletePost(postId) {
+
   }
 }

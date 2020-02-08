@@ -9,9 +9,9 @@ import { PostService } from 'src/app/services/post.service';
   styleUrls: ['./board-user.component.css']
 })
 export class BoardUserComponent implements OnInit {
-  content = '';
+  info = '';
   postTitle: String;
-  postDescription: String;
+  postContent: String;
   formGroup: FormGroup;
 
   constructor(
@@ -22,31 +22,33 @@ export class BoardUserComponent implements OnInit {
     this.postService = postService;
     this.formGroup = this.formBuilder.group({
       postTitle: '',
-      posDescription: ''
+      postContent: ''
     });
   }
 
   ngOnInit() {
-    this.userService.getUserBoard().subscribe(
+    /*this.userService.getUserBoard().subscribe(
       data => {
-        this.content = data;
+        this.info = data;
       },
       err => {
-        this.content = JSON.parse(err.error).message;
+        this.info = JSON.parse(err.error).message;
       }
-    );
+    );*/
   }
 
-  onSubmit(formGroup: FormGroup) {
-    this.postTitle = this.formGroup.get('postTitle').value;
-    this.postDescription = this.formGroup.get('posDescription').value;
+  onSubmit(formData) {
+    console.log("data before service:", formData);
 
-    let newPostData = {
+    this.postTitle = this.formGroup.get('postTitle').value;
+    this.postContent = this.formGroup.get('postContent').value;
+
+    const newPost = {
       title: this.postTitle,
-      description: this.postDescription
+      content: this.postContent
     };
 
-    this.postService.createPost(newPostData).subscribe((data) => {
+    this.postService.createPost(newPost).subscribe((data) => {
       console.log(data);
     });
   }
