@@ -6,6 +6,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -49,27 +50,26 @@ public class User {
     @Column(name = "update_date")
     private Date updatedDate;
     
-    @ManyToOne
-    private Address address;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private Set<Post> posts;
     
     
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", role="
-				+ role + ", creationDate=" + creationDate + ", updatedDate=" + updatedDate + ", address=" + address
-				+ "]";
+				+ role + ", creationDate=" + creationDate + ", updatedDate=" + updatedDate + ", posts=" + posts + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((creationDate == null) ? 0 : creationDate.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((posts == null) ? 0 : posts.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		result = prime * result + ((updatedDate == null) ? 0 : updatedDate.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
@@ -85,11 +85,6 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (address == null) {
-			if (other.address != null)
-				return false;
-		} else if (!address.equals(other.address))
-			return false;
 		if (creationDate == null) {
 			if (other.creationDate != null)
 				return false;
@@ -106,6 +101,11 @@ public class User {
 			if (other.password != null)
 				return false;
 		} else if (!password.equals(other.password))
+			return false;
+		if (posts == null) {
+			if (other.posts != null)
+				return false;
+		} else if (!posts.equals(other.posts))
 			return false;
 		if (role != other.role)
 			return false;
@@ -178,11 +178,11 @@ public class User {
 		this.updatedDate = updatedDate;
 	}
 
-	public Address getAddress() {
-		return address;
+	public Set<Post> getPosts() {
+		return posts;
 	}
 
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setPosts(Set<Post> posts) {
+		this.posts = posts;
 	}
 }
