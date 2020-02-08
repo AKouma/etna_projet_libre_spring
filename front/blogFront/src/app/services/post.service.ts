@@ -16,6 +16,15 @@ export class PostService {
 
   constructor(private http: HttpClient) { }
 
+  getPost(postId): Observable<any> {
+    const data = JSON.stringify({ id: postId });
+    console.log('data stringify:', data);
+
+    const dataAsJSON = JSON.parse(data);
+    console.log('data JSON:', dataAsJSON);
+    return this.http.get<any>('http://localhost:3000/getPost', { params: { id: postId } });
+  }
+
   getPosts(): Observable<any> {
     return this.http.get('http://localhost:3000/getPosts');
   }
@@ -27,7 +36,7 @@ export class PostService {
 
     console.log("post to send: ", post);
     console.log("post to send as JSON: ", dataAsJSON);
-    return this.http.post<any>('http://localhost:3000/insert-post', dataAsJSON, httpOptions);
+    return this.http.post<any>('http://localhost:3000/create-post', dataAsJSON, httpOptions);
   }
 
   deletePost(postId) {

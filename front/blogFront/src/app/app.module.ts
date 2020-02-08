@@ -12,6 +12,7 @@ import { BoardUserComponent } from './components/board-user/board-user.component
 import { BoardAdminComponent } from './components/board-admin/board-admin.component';
 
 import { authInterceptorProviders } from '../helpers/auth.interceptor';
+import { PostDetailComponent } from './components/post-detail/post-detail.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { authInterceptorProviders } from '../helpers/auth.interceptor';
     LoginComponent,
     RegisterComponent,
     BoardUserComponent,
-    BoardAdminComponent
+    BoardAdminComponent,
+    PostDetailComponent
   ],
   imports: [
     FormsModule,

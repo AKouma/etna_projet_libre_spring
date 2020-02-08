@@ -7,11 +7,8 @@
         </div>
         <div class="card-body">
           <p class="card-text">{{post.content}}</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+          <button class="btn btn-primary" (click)="gotoPostDetail('/post', post.id)">Show post</button>
         </div>
-        <ul class="list-group list-group-flush" *ngFor="let comment of post.comments">
-          <li class="list-group-item">{{comment.content}}</li>
-        </ul>
       </div>
     </ul>
   </div>
