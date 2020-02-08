@@ -7,3 +7,8 @@ Pour le projet libre du module nous souhaitons réalisé un blog avec les caract
 -Pas besoin de se connecter pour voir tout les posts
 -Pour commenter un post on doit se connecter à l'application(de même pour publier un post)
 -La supression d'un commentaire sur un post peux se faire par l'auteur du commentaire ou celuil qui à publier le post
+
+
+Donnée envoyé:
+
+Toute les données sont des JSON et sont envoyé via http
