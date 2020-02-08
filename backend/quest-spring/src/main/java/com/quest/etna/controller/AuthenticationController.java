@@ -50,7 +50,8 @@ public class AuthenticationController {
     @ResponseStatus(HttpStatus.CREATED)
     UserDetails registerUser(@RequestBody UserAuthen userAuthen) {
         UserDetails userDetailsToRegister;
-        if (userAuthen == null || userAuthen.getPassword() == null || userAuthen.getUsername() == null) {
+        if (userAuthen == null || userAuthen.getPassword() == null || userAuthen.getUsername() == null 
+        		|| userAuthen.getEmail() == null) {
             throw new ParametersNotFound();
         } else {
             boolean isAlreadyExist = userRepository.findByUsername(userAuthen.getUsername()) != null;
@@ -59,8 +60,9 @@ public class AuthenticationController {
             } else {
                 User usertoRegister = new User();
                 usertoRegister.setCreationDate(new Date());
-                usertoRegister.setUserName(userAuthen.getUsername());
+                usertoRegister.setUsername(userAuthen.getUsername());
                 usertoRegister.setPassword(StringUtils.hashBcrypt(userAuthen.getPassword()));
+                usertoRegister.setEmail(userAuthen.getEmail());
                 usertoRegister = userRepository.save(usertoRegister);
                 userDetailsToRegister = new UserDetails(usertoRegister);
             }

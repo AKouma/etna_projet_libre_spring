@@ -30,6 +30,10 @@ public class User {
     @NotBlank
     @Column(nullable = false)
     private String password;
+    
+    @NotBlank
+    @Column(nullable = false)
+    private String email;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "user_role")
@@ -47,112 +51,134 @@ public class User {
     
     @ManyToOne
     private Address address;
+    
+    
 
 	@Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((creationDate == null) ? 0 : creationDate.hashCode());
-        result = prime * result + id;
-        result = prime * result + ((password == null) ? 0 : password.hashCode());
-        result = prime * result + ((role == null) ? 0 : role.hashCode());
-        result = prime * result + ((updatedDate == null) ? 0 : updatedDate.hashCode());
-        result = prime * result + ((username == null) ? 0 : username.hashCode());
-        return result;
-    }
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", role="
+				+ role + ", creationDate=" + creationDate + ", updatedDate=" + updatedDate + ", address=" + address
+				+ "]";
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        User other = (User) obj;
-        if (creationDate == null) {
-            if (other.creationDate != null)
-                return false;
-        } else if (!creationDate.equals(other.creationDate))
-            return false;
-        if (id != other.id)
-            return false;
-        if (password == null) {
-            if (other.password != null)
-                return false;
-        } else if (!password.equals(other.password))
-            return false;
-        if (role != other.role)
-            return false;
-        if (updatedDate == null) {
-            if (other.updatedDate != null)
-                return false;
-        } else if (!updatedDate.equals(other.updatedDate))
-            return false;
-        if (username == null) {
-            if (other.username != null)
-                return false;
-        } else if (!username.equals(other.username))
-            return false;
-        return true;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime * result + ((creationDate == null) ? 0 : creationDate.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((role == null) ? 0 : role.hashCode());
+		result = prime * result + ((updatedDate == null) ? 0 : updatedDate.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		return result;
+	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (address == null) {
+			if (other.address != null)
+				return false;
+		} else if (!address.equals(other.address))
+			return false;
+		if (creationDate == null) {
+			if (other.creationDate != null)
+				return false;
+		} else if (!creationDate.equals(other.creationDate))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (id != other.id)
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (role != other.role)
+			return false;
+		if (updatedDate == null) {
+			if (other.updatedDate != null)
+				return false;
+		} else if (!updatedDate.equals(other.updatedDate))
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		return true;
+	}
 
-    @Override
-    public String toString() {
-        return "User [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role
-                + ", creationDate=" + creationDate + ", updatedDate=" + updatedDate + "]";
-    }
+	public int getId() {
+		return id;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public String getUserName() {
-        return username;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public void setUserName(String userName) {
-        this.username = userName;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public UserRole getRole() {
-        return role;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setRole(UserRole role) {
-        this.role = role;
-    }
+	public UserRole getRole() {
+		return role;
+	}
 
-    public Date getCreationDate() {
-        return creationDate;
-    }
+	public void setRole(UserRole role) {
+		this.role = role;
+	}
 
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
+	public Date getCreationDate() {
+		return creationDate;
+	}
 
-    public Date getUpdatedDate() {
-        return updatedDate;
-    }
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
 
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
-    }
-    
-    public Address getAddress() {
+	public Date getUpdatedDate() {
+		return updatedDate;
+	}
+
+	public void setUpdatedDate(Date updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+
+	public Address getAddress() {
 		return address;
 	}
 
