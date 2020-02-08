@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from '../../services/user.service';
+import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-board-user',
@@ -15,8 +16,10 @@ export class BoardUserComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder, private userService: UserService,
+    private postService: PostService
   ) {
     this.formBuilder = formBuilder;
+    this.postService = postService;
     this.formGroup = this.formBuilder.group({
       postTitle: '',
       posDescription: ''
@@ -37,5 +40,14 @@ export class BoardUserComponent implements OnInit {
   onSubmit(formGroup: FormGroup) {
     this.postTitle = this.formGroup.get('postTitle').value;
     this.postDescription = this.formGroup.get('posDescription').value;
+
+    let newPostData = {
+      title: this.postTitle,
+      description: this.postDescription
+    };
+
+    this.postService.createPost(newPostData).subscribe((data) => {
+      console.log(data);
+    });
   }
 }
