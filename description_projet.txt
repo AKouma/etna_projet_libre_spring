@@ -12,3 +12,5 @@ Pour le projet libre du module nous souhaitons réalisé un blog avec les caract
 Donnée envoyé:
 
 Toute les données sont des JSON et sont envoyé via http
+
+{ title: post.title, description: post.description }
