@@ -11,6 +11,21 @@ Pour le projet libre du module nous souhaitons réalisé un blog avec les caract
 
 Donnée envoyé:
 
-Toute les données sont des JSON et sont envoyé via http
+Toute les données sont des JSON et sont envoyé via http:
+{ title: post.title, content: post.description } ==>ceci est un exemple si cela ne convient pas merci de m'en informé au plus vite svp
 
-{ title: post.title, description: post.description }
+
+-Quand on est sur la page d'accueil au chargement une requête "getPosts()" est adressé au back
+-Quand clique sur le bouton "voir detail" cela nous amène vers la page de détail d'un post et de ces commentaires(au chargement de cette page une requête "getPost(id)"),
+l'idée est que grâce à "id" le back puisse retrouver le post en BDD et le retourner pour pouvoir l'afficher
+
+-Quand on va sur userBoard il y a le formulaire de création de post une fois soumis le formulaire 
+fait une requête "post" avec les data au format json indiqué ci-dessus
+
+Toutes les requête vers le back se trouve dans:
+front/blogFront/src/app/services ==> voir les fichiers .ts (ne pas regarder .spec.ts)
+
+Toutes les vues et Controller sont dans:
+front/blogFront/src/app/components ==> idem voir .ts et non .spec.ts
+
+Si qq chose ne convient pas ou n'est pas comprehensible merci de me faire un retour o plus vite
