@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { TokenStorageService } from './token-storage.service';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -14,9 +15,10 @@ const httpOptions = {
 })
 export class PostService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private tokenStorageService: TokenStorageService) { }
 
   getPost(postId): Observable<any> {
+    httpOptions.headers.set('Authorization', 'Bearer ' + this.tokenStorageService.getToken());
     const data = JSON.stringify({ id: postId });
     console.log('data stringify:', data);
 
@@ -26,10 +28,12 @@ export class PostService {
   }
 
   getPosts(): Observable<any> {
-    return this.http.get('http://localhost:3000/getPosts');
+    httpOptions.headers.set('Authorization', 'Bearer ' + this.tokenStorageService.getToken());
+    return this.http.get('http://localhost:3000/posts/get_posts', httpOptions);
   }
 
   createPost(post): Observable<any> {
+    httpOptions.headers.set('Authorization', 'Bearer ' + this.tokenStorageService.getToken());
     const data = JSON.stringify({ title: post.title, content: post.content });
     console.log("data: stringify", data);
     const dataAsJSON = JSON.parse(data);
@@ -40,6 +44,6 @@ export class PostService {
   }
 
   deletePost(postId) {
-
+    httpOptions.headers.set('Authorization', 'Bearer ' + this.tokenStorageService.getToken());
   }
 }

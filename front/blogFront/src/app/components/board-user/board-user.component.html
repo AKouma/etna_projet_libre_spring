@@ -1,6 +1,6 @@
 <section>
   <h1>
-    Welcolm "name of user"
+    Welcome user
   </h1>
   <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
     <div class="form-group">
@@ -15,8 +15,8 @@
     <button type="submit">create</button>
   </form>
   <h2>Your posts:</h2>
-  <!--
-    <div class="w-50 mx-auto pt-5">
+  <div class="w-50 mx-auto pt-5">
+    <ul class="list-inline pb-5" *ngFor="let post of postList.posts">
       <div class="card" style="width: 18rem;">
         <div class="card-header">
           {{post.title}}
@@ -28,6 +28,6 @@
           <li class="list-group-item">{{comment.content}}</li>
         </ul>
       </div>
-    </div>
-  -->
+    </ul>
+  </div>
 </section>

@@ -20,7 +20,7 @@ export class AuthService {
   constructor(private http: HttpClient, private tokenStorageService: TokenStorageService) { }
 
   login(credentials): Observable<any> {
-    httpOptions.headers.set('Authorization', 'Bearer ' + this.tokenStorageService.getToken());
+    //httpOptions.headers.set('Authorization', 'Bearer ' + this.tokenStorageService.getToken());
     return this.http.post(AUTH_API + 'authenticate', {
       username: credentials.username,
       password: credentials.password
