@@ -40,7 +40,7 @@ export class PostService {
 
     console.log("post to send: ", post);
     console.log("post to send as JSON: ", dataAsJSON);
-    return this.http.post<any>('http://localhost:8090/post/create-post', dataAsJSON, httpOptions);
+    return this.http.post<any>('http://localhost:3000/create-post', dataAsJSON, httpOptions);
   }
 
   deletePost(postId) {
