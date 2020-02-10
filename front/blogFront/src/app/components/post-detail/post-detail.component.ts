@@ -14,7 +14,7 @@ export class PostDetailComponent implements OnInit {
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private postService: PostService) { }
 
   ngOnInit() {
-    console.log(this.activatedRoute.snapshot.params.id);
+    console.log('id params:', this.activatedRoute.snapshot.params.id);
     this.getPostDetail(this.activatedRoute.snapshot.params.id);
     console.log(this.post);
   }
