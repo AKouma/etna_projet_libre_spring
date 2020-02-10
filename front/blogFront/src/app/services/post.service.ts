@@ -24,12 +24,12 @@ export class PostService {
 
     const dataAsJSON = JSON.parse(data);
     console.log('data JSON:', dataAsJSON);
-    return this.http.get<any>('http://localhost:3000/getPost', { params: { id: postId } });
+    return this.http.get<any>('http://localhost:8090/post/getPost', { params: { id: postId } });
   }
 
   getPosts(): Observable<any> {
     httpOptions.headers.set('Authorization', 'Bearer ' + this.tokenStorageService.getToken());
-    return this.http.get('http://localhost:3000/posts/get_posts', httpOptions);
+    return this.http.get('http://localhost:8090/posts/get_posts', httpOptions);
   }
 
   createPost(post): Observable<any> {
@@ -40,7 +40,7 @@ export class PostService {
 
     console.log("post to send: ", post);
     console.log("post to send as JSON: ", dataAsJSON);
-    return this.http.post<any>('http://localhost:3000/create-post', dataAsJSON, httpOptions);
+    return this.http.post<any>('http://localhost:8090/post/create-post', dataAsJSON, httpOptions);
   }
 
   deletePost(postId) {
@@ -52,6 +52,6 @@ export class PostService {
     const dataAsJSON = JSON.parse(data);
     console.log("post to send as JSON: ", dataAsJSON);
 
-    return this.http.post('http://localhost:3000/delete', dataAsJSON, httpOptions);
+    return this.http.post('http://localhost:8090/post/delete-post', dataAsJSON, httpOptions);
   }
 }
