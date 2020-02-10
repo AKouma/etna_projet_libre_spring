@@ -27,13 +27,13 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.authService.login(this.form).subscribe(
       data => {
-        console.log("data access token:", data.accessToken.token);
-        this.tokenStorage.saveToken(data.accessToken.token);
-        this.tokenStorage.saveUser(data);
+        console.log('data access token:', data.token);
+        this.tokenStorage.saveToken(data.token);
+       // this.tokenStorage.saveUser(data);
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.roles = this.tokenStorage.getUser().roles;
+       // this.roles = this.tokenStorage.getUser().roles;
         this.reloadPage();
       },
       err => {
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
   }
 
   reloadPage() {
-    //window.location.reload();
+    // normalement ca  aide a alller vers board user(you can test)
     this.router.navigate(['/user']);
   }
 
