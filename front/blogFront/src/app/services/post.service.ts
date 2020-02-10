@@ -45,5 +45,13 @@ export class PostService {
 
   deletePost(postId) {
     httpOptions.headers.set('Authorization', 'Bearer ' + this.tokenStorageService.getToken());
+
+    const data = JSON.stringify({ id: postId });
+    console.log('data: stringify', data);
+
+    const dataAsJSON = JSON.parse(data);
+    console.log("post to send as JSON: ", dataAsJSON);
+
+    return this.http.post('http://localhost:3000/delete', dataAsJSON, httpOptions);
   }
 }
