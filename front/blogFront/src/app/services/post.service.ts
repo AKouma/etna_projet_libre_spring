@@ -34,7 +34,7 @@ export class PostService {
 
   createPost(post): Observable<any> {
     httpOptions.headers.set('Authorization', 'Bearer ' + this.tokenStorageService.getToken());
-    const data = JSON.stringify({ title: post.title, content: post.content });
+    const data = JSON.stringify({ title: post.title, content: post.content, categories: post.categories });
     console.log("data: stringify", data);
     const dataAsJSON = JSON.parse(data);
 

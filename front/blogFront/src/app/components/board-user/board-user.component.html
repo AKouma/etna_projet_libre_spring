@@ -12,7 +12,16 @@
       <label for="exampleFormControlTextarea1">Description:</label>
       <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="postContent"></textarea>
     </div>
-    <button type="submit">create</button>
+    <div class="form-group">
+      <label class="field-label">Categories:</label>
+      <div class="d-flex justify-content-around">
+        <div *ngFor="let categorie of formGroup.controls.categories.controls; let i = index">
+          <input type="checkbox" [formControlName]="i">
+          {{categories[i].categorie}}
+        </div>
+      </div>
+    </div>
+    <button type=" submit">create</button>
   </form>
   <h2>Your posts:</h2>
   <!--
