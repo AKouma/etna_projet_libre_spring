@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { PostService } from 'src/app/services/post.service';
+import { TokenStorageService } from '../../services/token-storage.service';
 
 @Component({
   selector: 'app-board-user',
@@ -28,7 +29,9 @@ export class BoardUserComponent implements OnInit {
   ];*/
 
   constructor(
-    private formBuilder: FormBuilder, private userService: UserService,
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private tokenStorageService: TokenStorageService,
     private postService: PostService
   ) {
 
@@ -42,6 +45,7 @@ export class BoardUserComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("user info Koumare:", this.tokenStorageService.getUser());
     /*this.userService.getUserBoard().subscribe(
       data => {
         this.info = data;

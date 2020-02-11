@@ -11,6 +11,10 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+  getUser() {
+
+  }
+
   getUserBoard(): Observable<any> {
     return this.http.get(AUTH_API + 'user', { responseType: 'text' });
   }
