@@ -29,11 +29,11 @@ export class LoginComponent implements OnInit {
       data => {
         console.log('data access token:', data.token);
         this.tokenStorage.saveToken(data.token);
-       // this.tokenStorage.saveUser(data);
+        // this.tokenStorage.saveUser(data);
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-       // this.roles = this.tokenStorage.getUser().roles;
+        // this.roles = this.tokenStorage.getUser().roles;
         this.reloadPage();
       },
       err => {
