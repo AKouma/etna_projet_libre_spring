@@ -1,7 +1,6 @@
 package com.quest.etna.controller;
 
 import com.quest.etna.config.JwtTokenUtil;
-import com.quest.etna.config.JwtUserDetailsService;
 import com.quest.etna.customexception.ParametersNotFound;
 import com.quest.etna.customexception.ResourceAlreadyExist;
 import com.quest.etna.model.User;
@@ -9,6 +8,7 @@ import com.quest.etna.model.dto.AuthenToken;
 import com.quest.etna.model.dto.UserAuthen;
 import com.quest.etna.model.dto.UserDetails;
 import com.quest.etna.repositories.UserRepository;
+import com.quest.etna.services.UserService;
 import com.quest.etna.utils.StringUtils;
 import com.quest.etna.utils.Userutils;
 
@@ -26,7 +26,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -89,6 +88,8 @@ public class AuthenticationController {
     	                	//generating token
     	                	token = new AuthenToken();
     	                	token.setToken(jwtTokenUtil.generateToken(user));
+    	                	token.setRole(Userutils.getCurrentUser().getAuthorities().toString());
+    	                	System.out.print(token.getToken());
     	                	//save user unhash credentials
     	                	users.put(userAuthen.getUsername(), userAuthen.getPassword());
     	                }
