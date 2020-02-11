@@ -7,6 +7,9 @@
       <div class="card-body">
         {{post.content}}
       </div>
+      <div class="card-body">
+        <p class="card-text">{{post.categorie}}</p>
+      </div>
       <ul class="list-group list-group-flush" *ngFor="let comment of post.comments">
         <li class="list-group-item">{{comment.content}}</li>
       </ul>
