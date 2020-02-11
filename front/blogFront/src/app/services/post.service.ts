@@ -24,12 +24,12 @@ export class PostService {
 
     const dataAsJSON = JSON.parse(data);
     console.log('data JSON:', dataAsJSON);
-    return this.http.get<any>('http://localhost:8090/post/all_posts', { params: { id: postId } });
+    return this.http.get<any>('http://localhost:8090/post/get_post', { params: { id: postId } });
   }
 
   getPosts(): Observable<any> {
     httpOptions.headers.set('Authorization', 'Bearer ' + this.tokenStorageService.getToken());
-    return this.http.get('http://localhost:8090/posts/get_posts', httpOptions);
+    return this.http.get('http://localhost:8090/post/all_posts', httpOptions);
   }
 
   createPost(post): Observable<any> {
