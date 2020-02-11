@@ -37,7 +37,7 @@ export class BoardUserComponent implements OnInit {
     this.formGroup = this.formBuilder.group({
       postTitle: '',
       postContent: '',
-      categories: ''
+      postCategorie: ''
     });
   }
 
