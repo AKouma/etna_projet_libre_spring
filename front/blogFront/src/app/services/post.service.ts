@@ -24,7 +24,7 @@ export class PostService {
 
     const dataAsJSON = JSON.parse(data);
     console.log('data JSON:', dataAsJSON);
-    return this.http.get<any>('http://localhost:8090/post/get_post', { params: { id: postId } });
+    return this.http.get<any>('http://localhost:8090/post/all_posts', { params: { id: postId } });
   }
 
   getPosts(): Observable<any> {
