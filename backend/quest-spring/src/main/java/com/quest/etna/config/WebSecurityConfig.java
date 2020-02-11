@@ -55,6 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 			.antMatchers(HttpMethod.POST, "/register").permitAll()
 			.antMatchers(HttpMethod.POST, "/authenticate").permitAll()
+			.antMatchers(HttpMethod.POST, "/post/all_posts").permitAll()
 			.antMatchers(HttpMethod.OPTIONS, "/**").permitAll() //for allow cors policy request
 			.anyRequest()
 			.authenticated();

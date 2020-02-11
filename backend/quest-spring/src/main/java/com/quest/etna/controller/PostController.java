@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -54,6 +55,16 @@ public class PostController {
 			 postRepository.findAll().forEach(posts::add);;
 		 }
 		 return posts;
+	 }
+	 
+	 @GetMapping("get_post")
+	 @ResponseStatus(HttpStatus.OK)
+	 public Post getPostById(@RequestParam int id) {
+		 if(!Userutils.isConnected())
+			   throw new AuthenticateException();
+		 else {
+			return postRepository.findById(id).get();
+		 }
 	 }
 
 }
