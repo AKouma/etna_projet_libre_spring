@@ -12,9 +12,10 @@ export class BoardUserComponent implements OnInit {
   info = '';
   postTitle: String;
   postContent: String;
+  postCategorie: String;
   formGroup: FormGroup;
 
-  categories: any = [
+  /*categories: any = [
     {
       id: 1, categorie: 'movie'
     },
@@ -24,23 +25,19 @@ export class BoardUserComponent implements OnInit {
     {
       id: 3, categorie: 'other'
     },
-  ];
+  ];*/
 
   constructor(
     private formBuilder: FormBuilder, private userService: UserService,
     private postService: PostService
   ) {
-    const formControls = this.categories.map((control) => {
-      let fmControl = new FormControl(false);
 
-      console.log(fmControl);
-    });
     this.formBuilder = formBuilder;
     this.postService = postService;
     this.formGroup = this.formBuilder.group({
       postTitle: '',
       postContent: '',
-      categories: new FormArray(formControls)
+      categories: ''
     });
   }
 
@@ -61,15 +58,12 @@ export class BoardUserComponent implements OnInit {
 
     this.postTitle = this.formGroup.get('postTitle').value;
     this.postContent = this.formGroup.get('postContent').value;
-
-    const selectedCategorie = this.formGroup.value.categories.map((checked, index) => {
-      checked ? this.categories[index].id : null
-    }).filter(value => value != null);
+    this.postCategorie = this.formGroup.get('postCategorie').value;
 
     const newPost = {
       title: this.postTitle,
       content: this.postContent,
-      categories: selectedCategorie
+      categories: this.postCategorie
     };
 
     this.postService.createPost(newPost).subscribe((data) => {
