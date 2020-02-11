@@ -29,4 +29,9 @@ export class CategoryService {
     return this.http.get<any>('http://localhost:8090/category/get_category', { params: { id: postId } });
 
   }
+
+  getCategories(): Observable<any> {
+    httpOptions.headers.set('Authorization', 'Bearer ' + this.tokenStorageService.getToken());
+    return this.http.get('http://localhost:8090/category/all_categories', httpOptions);
+  }
 }
