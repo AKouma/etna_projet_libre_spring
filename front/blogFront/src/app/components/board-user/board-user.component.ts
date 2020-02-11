@@ -42,7 +42,7 @@ export class BoardUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.getUserBoard().subscribe(
+    /*this.userService.getUserBoard().subscribe(
       data => {
         this.info = data;
         console.log('user info:', this.info);
@@ -50,7 +50,7 @@ export class BoardUserComponent implements OnInit {
       err => {
         this.info = JSON.parse(err.error).message;
       }
-    );
+    );*/
   }
 
   onSubmit(formData) {
