@@ -6,6 +6,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.quest.etna.model.User;
+import com.quest.etna.repositories.UserRepository;
 
 public class Userutils {
 	
@@ -33,4 +34,8 @@ public class Userutils {
 	    	else
 	    	    return null;
 	    }
+	  
+	  public static User getUserFromUserdetails(UserRepository userRepository) {
+		  return userRepository.findByUsername(getCurrentUser().getUsername());
+	  }
 }

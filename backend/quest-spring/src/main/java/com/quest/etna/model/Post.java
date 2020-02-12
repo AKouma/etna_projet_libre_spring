@@ -19,6 +19,9 @@ import javax.validation.constraints.NotBlank;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "post")
 public class Post {
@@ -51,12 +54,15 @@ public class Post {
 	  private Date updatedDate;
 	  
 	  @ManyToOne
+	  @JsonBackReference
 	  private User user;
 	  
 	  @ManyToOne
+	  @JsonBackReference
 	  private Category category;
 	  
 	  @OneToMany(fetch = FetchType.LAZY, mappedBy = "post")
+	  @JsonManagedReference
 	  private Set<Comment> comments;
 
 	@Override

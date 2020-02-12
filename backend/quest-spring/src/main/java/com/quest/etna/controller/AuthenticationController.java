@@ -8,7 +8,6 @@ import com.quest.etna.model.dto.AuthenToken;
 import com.quest.etna.model.dto.UserAuthen;
 import com.quest.etna.model.dto.UserDetails;
 import com.quest.etna.repositories.UserRepository;
-import com.quest.etna.services.UserService;
 import com.quest.etna.utils.StringUtils;
 import com.quest.etna.utils.Userutils;
 

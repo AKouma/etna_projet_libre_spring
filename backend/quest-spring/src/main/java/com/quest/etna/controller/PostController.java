@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.quest.etna.customexception.AuthenticateException;
 import com.quest.etna.customexception.ParametersNotFound;
+import com.quest.etna.model.Category;
 import com.quest.etna.model.Post;
 import com.quest.etna.model.dto.PostDto;
+import com.quest.etna.repositories.CategoryRepository;
 import com.quest.etna.repositories.PostRepository;
+import com.quest.etna.repositories.UserRepository;
 import com.quest.etna.utils.Userutils;
 
 @RestController
@@ -29,17 +32,33 @@ public class PostController {
 	@Autowired
 	PostRepository postRepository;
 	
+	@Autowired
+	UserRepository userRepository;
+	
+	@Autowired
+	CategoryRepository categoryRepository;
+	
 	 @PostMapping("/create_post")
 	 @ResponseStatus(HttpStatus.CREATED)
 	 public Post createPost(@RequestBody PostDto postDto) {
 		 Post post  = null;
 		 if(!Userutils.isConnected() || postDto == null || postDto.getTitle() == null || postDto.getContent() == null
-		/* || postDto.getCategory() == null */)
+		 || postDto.getCategories() == null )
 			   throw new ParametersNotFound();
 		 else {
+			 //insert category
+			 Category category = new Category();
+			 category.setName(postDto.getCategories());
+			 if(categoryRepository.findByName(postDto.getCategories()) == null)
+				 categoryRepository.save(category);
+			 else
+				 category = categoryRepository.findByName(postDto.getCategories());
+			 
 			 post = new Post();
 			 post.setTitle(postDto.getTitle());
 			 post.setContent(postDto.getContent());
+			 post.setUser(Userutils.getUserFromUserdetails(userRepository));
+			 post.setCategory(category);
 			 post = postRepository.save(post);
 		 }
 		 return post;
@@ -48,13 +67,13 @@ public class PostController {
 	 @GetMapping("/all_posts")
 	 @ResponseStatus(HttpStatus.OK)
 	 public List<Post> getPosts() {
-		 List<Post> posts  = new ArrayList<Post>();
-		 if(!Userutils.isConnected())
-			   throw new AuthenticateException();
-		 else {
-			 postRepository.findAll().forEach(posts::add);;
+		 if(!Userutils.isConnected()) {
+			 throw new AuthenticateException();
+		 }else {
+			 List<Post> posts  = new ArrayList<Post>();
+			 postRepository.findAll().forEach(posts::add);
+			 return posts; 
 		 }
-		 return posts;
 	 }
 	 
 	 @GetMapping("get_post")

@@ -16,6 +16,8 @@ import javax.validation.constraints.NotBlank;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "comment")
 public class Comment {
@@ -43,12 +45,17 @@ public class Comment {
 	private Date updatedDate;
 	
 	@ManyToOne
+	@JsonBackReference
 	private Post post;
+	
+	@ManyToOne
+	@JsonBackReference
+	private User user;
 
 	@Override
 	public String toString() {
 		return "Comment [id=" + id + ", content=" + content + ", creationDate=" + creationDate + ", updatedDate="
-				+ updatedDate + ", post=" + post + "]";
+				+ updatedDate + ", post=" + post + ", user=" + user + "]";
 	}
 
 	@Override
@@ -60,6 +67,7 @@ public class Comment {
 		result = prime * result + id;
 		result = prime * result + ((post == null) ? 0 : post.hashCode());
 		result = prime * result + ((updatedDate == null) ? 0 : updatedDate.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -93,6 +101,11 @@ public class Comment {
 			if (other.updatedDate != null)
 				return false;
 		} else if (!updatedDate.equals(other.updatedDate))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
 			return false;
 		return true;
 	}
@@ -137,4 +150,11 @@ public class Comment {
 		this.post = post;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 }
