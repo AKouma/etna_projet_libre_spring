@@ -1,6 +1,6 @@
 <section>
   <h1>
-    Welcome user
+    Welcome {{userData.user.username}}
   </h1>
   <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
     <div class="form-group">

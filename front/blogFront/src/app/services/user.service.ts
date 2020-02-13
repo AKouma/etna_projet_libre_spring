@@ -22,7 +22,7 @@ export class UserService {
   getUserInfo(TOKEN_USER): Observable<any> {
 
     httpOptions.headers.set('Authorization', 'Bearer ' + this.tokenStorageService.getToken());
-    return this.http.get<any>('http://localhost:8090/user/get_user', { params: { token: TOKEN_USER } });
+    return this.http.get<any>('http://localhost:8090/user/user_infos', { params: { token: TOKEN_USER } });
 
   }
 

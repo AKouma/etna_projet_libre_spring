@@ -10,7 +10,7 @@ import { TokenStorageService } from '../../services/token-storage.service';
   styleUrls: ['./board-user.component.css']
 })
 export class BoardUserComponent implements OnInit {
-  info = '';
+  userData = '';
   postTitle: String;
   postContent: String;
   postCategorie: String;
@@ -46,6 +46,10 @@ export class BoardUserComponent implements OnInit {
 
   ngOnInit() {
     console.log("user info Koumare:", this.tokenStorageService.getUser());
+    this.userService.getUserInfo(this.tokenStorageService.getToken()).subscribe((data) => {
+      this.userData = data;
+      console.log("Msg for koumare--> user info--> ", this.userData);
+    });
     console.log("Or there: ", this.userService.getUserInfo(this.tokenStorageService.getToken()));
     /*this.userService.getUserBoard().subscribe(
       data => {
