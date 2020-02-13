@@ -25,9 +25,18 @@
       <div class="card" style="width: 18rem;">
         <div class="card-header">
           {{post.title}}
-
+          <button class="btn btn-danger" (click)="deletePost(post.id)"></button>
         </div>
         <div class="card-body">
+          <h1>Post content:</h1>
+          {{post.content}}
+        </div>
+        <div class="card-body">
+          <h1>Post Categorie:</h1>
+          {{post.content}}
+        </div>
+        <div class="card-body">
+          <h1>Post Categorie:</h1>
           {{post.content}}
         </div>
         <ul class="list-group list-group-flush" *ngFor="let comment of post.comments">

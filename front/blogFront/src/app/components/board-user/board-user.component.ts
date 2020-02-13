@@ -62,6 +62,11 @@ export class BoardUserComponent implements OnInit {
     );*/
   }
 
+  deletePost(postId) {
+    this.postService.deletePost(postId);
+    window.location.reload();
+  }
+
   onSubmit(formData) {
     console.log('data before service:', formData);
 
