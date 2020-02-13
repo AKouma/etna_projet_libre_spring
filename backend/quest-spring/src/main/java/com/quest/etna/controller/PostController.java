@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +20,7 @@ import com.quest.etna.customexception.ParametersNotFound;
 import com.quest.etna.model.Category;
 import com.quest.etna.model.Post;
 import com.quest.etna.model.dto.PostDto;
+import com.quest.etna.model.dto.PostToDeleteDto;
 import com.quest.etna.repositories.CategoryRepository;
 import com.quest.etna.repositories.PostRepository;
 import com.quest.etna.repositories.UserRepository;
@@ -76,13 +78,34 @@ public class PostController {
 		 }
 	 }
 	 
-	 @GetMapping("get_post")
+	 @GetMapping("/get_post")
 	 @ResponseStatus(HttpStatus.OK)
 	 public Post getPostById(@RequestParam int id) {
 		 if(!Userutils.isConnected())
 			   throw new AuthenticateException();
 		 else {
-			return postRepository.findById(id).get();
+			 if(id > -1)
+				 return postRepository.findById(id).get();
+			 else
+				 throw new ParametersNotFound();
+		 }
+	 }
+	 
+	 @PostMapping("/delete_post")
+	 @ResponseStatus(HttpStatus.OK)
+	 public void deletePost(@RequestBody PostToDeleteDto post) {
+		 System.err.println("id to delete : " + post.getId());
+		 if(!Userutils.isConnected()) {
+			 throw new AuthenticateException();
+		 }
+		 else {
+			 System.err.println("we enter inside delete method");
+			 if(post != null && post.getId() > 0) {
+				  postRepository.deleteById(post.getId());
+				System.err.println("delete rquest is done"); 
+			 }
+			 else
+				 throw new ParametersNotFound(); 
 		 }
 	 }
 

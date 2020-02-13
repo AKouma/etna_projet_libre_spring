@@ -88,7 +88,7 @@ public class AuthenticationController {
     	                	token = new AuthenToken();
     	                	token.setToken(jwtTokenUtil.generateToken(user));
     	                	token.setRole(Userutils.getCurrentUser().getAuthorities().toString());
-    	                	System.out.print(token.getToken());
+    	                	System.out.println(token.getToken());
     	                	//save user unhash credentials
     	                	users.put(userAuthen.getUsername(), userAuthen.getPassword());
     	                }
