@@ -50,9 +50,9 @@ public class UserController {
 			 commentRepository.findByUserId(user.getId()).forEach(userComments::add);
 			 
 			 UserInfoDto userInfoDto = new UserInfoDto();
+			 user.setComments(userComments);
+			 user.setPosts(userPosts);
 			 userInfoDto.setUser(user);
-			 userInfoDto.setComments(userComments);
-			 userInfoDto.setPosts(userPosts);
 			 
 			return userInfoDto;
 		 }
