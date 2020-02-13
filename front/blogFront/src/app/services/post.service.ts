@@ -43,7 +43,7 @@ export class PostService {
     return this.http.post<any>('http://localhost:8090/post/create_post', dataAsJSON, httpOptions);
   }
 
-  deletePost(postId) {
+  deletePost(postId): Observable<any> {
     httpOptions.headers.set('Authorization', 'Bearer ' + this.tokenStorageService.getToken());
 
     const data = JSON.stringify({ id: postId });
@@ -52,6 +52,6 @@ export class PostService {
     const dataAsJSON = JSON.parse(data);
     console.log("element to delete JSON", dataAsJSON);
 
-    return this.http.post('http://localhost:8090/post/delete_post', dataAsJSON, httpOptions);
+    return this.http.post<any>('http://localhost:8090/post/delete_post', dataAsJSON, httpOptions);
   }
 }

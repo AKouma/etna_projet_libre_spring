@@ -69,7 +69,9 @@ export class BoardUserComponent implements OnInit {
   }
 
   deletePost(postId) {
-    this.postService.deletePost(postId);
+    this.postService.deletePost(postId).subscribe((data) => {
+      console.log("res to delete request:", data);
+    });
     //window.location.reload();
   }
 
