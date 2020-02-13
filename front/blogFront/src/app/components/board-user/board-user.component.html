@@ -20,12 +20,12 @@
     <button type=" submit">create</button>
   </form>
   <h2>Your posts:</h2>
-  <!--
   <div class="w-50 mx-auto pt-5">
-    <ul class="list-inline pb-5" *ngFor="let post of postList.posts">
+    <ul class="list-inline pb-5" *ngFor="let post of userData.user.posts">
       <div class="card" style="width: 18rem;">
         <div class="card-header">
           {{post.title}}
+
         </div>
         <div class="card-body">
           {{post.content}}
@@ -36,5 +36,4 @@
       </div>
     </ul>
   </div>
-  -->
 </section>

@@ -78,5 +78,6 @@ export class BoardUserComponent implements OnInit {
     this.postService.createPost(newPost).subscribe((data) => {
       console.log(data);
     });
+    window.location.reload();
   }
 }
