@@ -46,6 +46,7 @@ export class BoardUserComponent implements OnInit {
 
   ngOnInit() {
     console.log("user info Koumare:", this.tokenStorageService.getUser());
+    console.log("Or there: ", this.userService.getUserInfo(this.tokenStorageService.getToken()));
     /*this.userService.getUserBoard().subscribe(
       data => {
         this.info = data;
