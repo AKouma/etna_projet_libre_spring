@@ -31,9 +31,9 @@
           <h3>Post content:</h3>
           {{post.content}}
         </div>
-        <!--<div class="card-body">
+        <div class="card-body">
           <h3>Add comment:</h3>
-          <form [formGroup]="formGroup" (ngSubmit)="createComment(formGroup.value)">
+          <form [formGroup]="formGroupComment" (ngSubmit)="createComment(formGroupComment.value)">
             <div class="form-group">
               <label for="postComment">Post title:</label>
               <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="write a comment"
@@ -41,7 +41,7 @@
             </div>
             <button class="btn btn-success" type="submit">add comment</button>
           </form>
-        </div>-->
+        </div>
         <ul class="list-group list-group-flush" *ngFor="let comment of post.comments">
           <li class="list-group-item">{{comment.content}}</li>
         </ul>

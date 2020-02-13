@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { PostService } from 'src/app/services/post.service';
 import { TokenStorageService } from '../../services/token-storage.service';
+import { CommentService } from 'src/app/services/comment.service';
 
 @Component({
   selector: 'app-board-user',
@@ -34,14 +35,17 @@ export class BoardUserComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private tokenStorageService: TokenStorageService,
-    private postService: PostService
+    private postService: PostService,
+    private commentService: CommentService
   ) {
 
     this.formBuilder = formBuilder;
     this.postService = postService;
-    /*this.formGroupComment = this.formBuilder.group({
+    this.commentService = commentService;
 
-    });*/
+    this.formGroupComment = this.formBuilder.group({
+      commentContent: '',
+    });
 
     this.formGroup = this.formBuilder.group({
       postTitle: '',
@@ -76,7 +80,16 @@ export class BoardUserComponent implements OnInit {
   }
 
   createComment(postId) {
+    this.commentContent = this.formGroupComment.get('postComment').value;
 
+    const newComment = {
+      content: this.commentContent,
+      postId: postId
+    };
+
+    this.commentService.createComment(newComment).subscribe((data) => {
+      console.log("res to create comment request:", data);
+    });
   }
 
   onSubmit(formData) {
