@@ -70,7 +70,7 @@ export class BoardUserComponent implements OnInit {
 
   deletePost(postId) {
     this.postService.deletePost(postId);
-    window.location.reload();
+    //window.location.reload();
   }
 
   createComment(postId) {
