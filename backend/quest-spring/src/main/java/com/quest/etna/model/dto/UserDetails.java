@@ -12,7 +12,7 @@ public class UserDetails {
 	}
 	
 	public UserDetails(User user) {
-		this.username = user.getUserName();
+		this.username = user.getUsername();
 		this.userRole = user.getRole();
 	}
 	

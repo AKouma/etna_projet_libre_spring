@@ -36,7 +36,7 @@ public class JwtUserDetails implements org.springframework.security.core.userdet
 
 	@Override
 	public String getUsername() {
-		return currentUser != null ? currentUser.getUserName() : null;
+		return currentUser != null ? currentUser.getUsername() : null;
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 package com.quest.etna.controller;
 
 import com.quest.etna.config.JwtTokenUtil;
-import com.quest.etna.config.JwtUserDetailsService;
 import com.quest.etna.customexception.ParametersNotFound;
 import com.quest.etna.customexception.ResourceAlreadyExist;
 import com.quest.etna.model.User;
@@ -16,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,12 +25,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class AuthenticationController {
 	
 	public static HashMap<String, String> users = new HashMap<String, String>();
@@ -48,7 +48,8 @@ public class AuthenticationController {
     @ResponseStatus(HttpStatus.CREATED)
     UserDetails registerUser(@RequestBody UserAuthen userAuthen) {
         UserDetails userDetailsToRegister;
-        if (userAuthen == null || userAuthen.getPassword() == null || userAuthen.getUsername() == null) {
+        if (userAuthen == null || userAuthen.getPassword() == null || userAuthen.getUsername() == null 
+        		|| userAuthen.getEmail() == null) {
             throw new ParametersNotFound();
         } else {
             boolean isAlreadyExist = userRepository.findByUsername(userAuthen.getUsername()) != null;
@@ -57,8 +58,9 @@ public class AuthenticationController {
             } else {
                 User usertoRegister = new User();
                 usertoRegister.setCreationDate(new Date());
-                usertoRegister.setUserName(userAuthen.getUsername());
+                usertoRegister.setUsername(userAuthen.getUsername());
                 usertoRegister.setPassword(StringUtils.hashBcrypt(userAuthen.getPassword()));
+                usertoRegister.setEmail(userAuthen.getEmail());
                 usertoRegister = userRepository.save(usertoRegister);
                 userDetailsToRegister = new UserDetails(usertoRegister);
             }
@@ -85,6 +87,8 @@ public class AuthenticationController {
     	                	//generating token
     	                	token = new AuthenToken();
     	                	token.setToken(jwtTokenUtil.generateToken(user));
+    	                	token.setRole(Userutils.getCurrentUser().getAuthorities().toString());
+    	                	System.out.println(token.getToken());
     	                	//save user unhash credentials
     	                	users.put(userAuthen.getUsername(), userAuthen.getPassword());
     	                }

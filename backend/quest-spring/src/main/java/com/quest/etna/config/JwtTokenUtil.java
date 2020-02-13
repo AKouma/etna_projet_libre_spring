@@ -52,7 +52,7 @@ public class JwtTokenUtil implements Serializable {
 	//generate token for user 
 	public String generateToken(User user) { 
 		Map<String, Object> claims = new HashMap<>(); 
-		return doGenerateToken(claims, user.getUserName()); 
+		return doGenerateToken(claims, user.getUsername()); 
 		} 
 	
 	//while creating the token - 
