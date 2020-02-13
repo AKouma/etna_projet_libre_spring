@@ -28,17 +28,20 @@
           <button class="btn btn-danger" (click)="deletePost(post.id)"></button>
         </div>
         <div class="card-body">
-          <h1>Post content:</h1>
+          <h3>Post content:</h3>
           {{post.content}}
         </div>
-        <div class="card-body">
-          <h1>Post Categorie:</h1>
-          {{post.content}}
-        </div>
-        <div class="card-body">
-          <h1>Post Categorie:</h1>
-          {{post.content}}
-        </div>
+        <!--<div class="card-body">
+          <h3>Add comment:</h3>
+          <form [formGroup]="formGroup" (ngSubmit)="createComment(formGroup.value)">
+            <div class="form-group">
+              <label for="postComment">Post title:</label>
+              <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="write a comment"
+                formControlName="postComment">
+            </div>
+            <button class="btn btn-success" type="submit">add comment</button>
+          </form>
+        </div>-->
         <ul class="list-group list-group-flush" *ngFor="let comment of post.comments">
           <li class="list-group-item">{{comment.content}}</li>
         </ul>

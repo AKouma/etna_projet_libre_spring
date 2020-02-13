@@ -14,7 +14,9 @@ export class BoardUserComponent implements OnInit {
   postTitle: String;
   postContent: String;
   postCategorie: String;
+  commentContent: String;
   formGroup: FormGroup;
+  formGroupComment: FormGroup;
 
   /*categories: any = [
     {
@@ -37,6 +39,10 @@ export class BoardUserComponent implements OnInit {
 
     this.formBuilder = formBuilder;
     this.postService = postService;
+    /*this.formGroupComment = this.formBuilder.group({
+
+    });*/
+
     this.formGroup = this.formBuilder.group({
       postTitle: '',
       postContent: '',
@@ -65,6 +71,10 @@ export class BoardUserComponent implements OnInit {
   deletePost(postId) {
     this.postService.deletePost(postId);
     window.location.reload();
+  }
+
+  createComment(postId) {
+
   }
 
   onSubmit(formData) {
