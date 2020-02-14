@@ -79,12 +79,12 @@ export class BoardUserComponent implements OnInit {
     window.location.reload();
   }
 
-  createComment(postId) {
+  createComment(commentField, postID) {
     this.commentContent = this.formGroupComment.get('commentContent').value;
 
     const newComment = {
-      content: this.commentContent,
-      postId: postId
+      content: commentField,
+      postId: postID
     };
 
     this.commentService.createComment(newComment).subscribe((data) => {
