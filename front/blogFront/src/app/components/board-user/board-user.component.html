@@ -33,7 +33,7 @@
         </div>
         <div class="card-body">
           <h3>Add comment:</h3>
-          <form [formGroupComment]="formGroupComment" (ngSubmit)="createComment(formGroupComment.value)">
+          <form [formGroup]="formGroupComment" (ngSubmit)="createComment(formGroupComment.value)">
             <div class="form-group">
               <label for="postComment">Post comment:</label>
               <input type="text" class="form-control" id="exampleFormControlInput3" placeholder="write a comment"
