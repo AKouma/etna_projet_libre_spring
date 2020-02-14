@@ -25,6 +25,6 @@ export class CommentService {
 
     console.log("comment to send: ", comment);
     console.log("comment to send as JSON: ", dataAsJSON);
-    return this.http.post<any>('http://localhost:8090/comment/create_comment', dataAsJSON, httpOptions);
+    return this.http.post<any>('http://localhost:8090/post/update_post', dataAsJSON, httpOptions);
   }
 }
