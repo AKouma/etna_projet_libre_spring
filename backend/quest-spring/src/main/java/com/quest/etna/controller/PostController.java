@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,11 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.quest.etna.customexception.AuthenticateException;
 import com.quest.etna.customexception.ParametersNotFound;
+import com.quest.etna.customexception.ResourceNotFound;
 import com.quest.etna.model.Category;
+import com.quest.etna.model.Comment;
 import com.quest.etna.model.Post;
 import com.quest.etna.model.dto.PostDto;
 import com.quest.etna.model.dto.PostToDeleteDto;
+import com.quest.etna.model.dto.UpdatPostDto;
 import com.quest.etna.repositories.CategoryRepository;
+import com.quest.etna.repositories.CommentRepository;
 import com.quest.etna.repositories.PostRepository;
 import com.quest.etna.repositories.UserRepository;
 import com.quest.etna.utils.Userutils;
@@ -39,6 +42,9 @@ public class PostController {
 	
 	@Autowired
 	CategoryRepository categoryRepository;
+	
+	@Autowired
+	CommentRepository commentRepository;
 	
 	 @PostMapping("/create_post")
 	 @ResponseStatus(HttpStatus.CREATED)
@@ -107,6 +113,45 @@ public class PostController {
 			 else
 				 throw new ParametersNotFound(); 
 		 }
+	 }
+	 
+	 @PostMapping("/update_post")
+	 @ResponseStatus(HttpStatus.OK)
+	 public boolean updatePost(@RequestBody UpdatPostDto updatePostDto) {
+		 boolean isUpdate = false;
+		 if(!Userutils.isConnected())
+			 throw new AuthenticateException();
+		 else {
+			 if(updatePostDto == null || updatePostDto.getPostId() < 0 || updatePostDto.getContent().isEmpty()) {
+				 throw new ParametersNotFound();
+			 }
+			 else {
+				 //init comment
+				 Comment comment = new Comment();
+				 comment.setContent(updatePostDto.getContent());
+				 Post post = postRepository.findById(updatePostDto.getPostId()).get();
+				 System.err.println("postId : "+ updatePostDto.getPostId());
+				 if(post == null) {
+					 System.err.println("post is null");
+					 throw new ResourceNotFound();
+				 }
+				 else {
+					 //save comment
+					 comment.setPost(post);
+					 comment = commentRepository.save(comment);
+					 //add comment
+					 List<Comment> comments = new ArrayList<>();
+					 if(post.getComments() != null)
+						 comments.addAll(post.getComments());
+					 comments.add(comment);
+					 //update post
+					 post.setComments(comments);
+					 postRepository.save(post);
+					 isUpdate = true;
+				 }
+			 }
+		 }
+		 return isUpdate;
 	 }
 
 }

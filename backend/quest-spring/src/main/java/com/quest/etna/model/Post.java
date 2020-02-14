@@ -1,7 +1,7 @@
 package com.quest.etna.model;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -63,7 +63,7 @@ public class Post {
 	  
 	  @OneToMany(fetch = FetchType.LAZY, mappedBy = "post")
 	  @JsonManagedReference
-	  private Set<Comment> comments;
+	  private List<Comment> comments;
 
 	@Override
 	public String toString() {
@@ -192,11 +192,11 @@ public class Post {
 		this.category = category;
 	}
 
-	public Set<Comment> getComments() {
+	public List<Comment> getComments() {
 		return comments;
 	}
 
-	public void setComments(Set<Comment> comments) {
+	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
 }
