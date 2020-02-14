@@ -83,7 +83,7 @@ export class BoardUserComponent implements OnInit {
     this.commentContent = this.formGroupComment.get('commentContent').value;
 
     const newComment = {
-      content: commentField,
+      content: this.commentContent,
       postId: postID
     };
 
